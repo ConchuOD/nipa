@@ -3,8 +3,8 @@ server = patchwork.kernel.org
 project = Linux RISC-V
 
 [dirs]
-tests = /home/bjorn/src/workflow/nipa/tests_rv
-trees = /home/bjorn/src/workflow/nipa/trees_rv
+tests = tests_rv
+trees = trees_rv
 
 [trees]
 for-next = for-next,for-next,origin,origin/for-next
