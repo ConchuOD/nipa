@@ -6,13 +6,13 @@
 tmpdir=$(mktemp -d)
 rc=0
 
-tuxmake --wrapper ccache --target-arch riscv --runtime podman --directory . \
+tuxmake --wrapper ccache --target-arch riscv -directory . \
 	-o $tmpdir --toolchain gcc-11 --kconfig allmodconfig || rc=1
 
 if [ $rc -ne 0 ]; then
   echo "Build failed" >&$DESC_FD
 else
-  tuxrun --device qemu-riscv64 --tuxmake $tmpdir --runtime podman || rc=1
+  tuxrun --device qemu-riscv64 --tuxmake $tmpdir || rc=1
   if [ $rc -ne 0 ]; then
     echo "Boot/poweroff failed" >&$DESC_FD
   fi

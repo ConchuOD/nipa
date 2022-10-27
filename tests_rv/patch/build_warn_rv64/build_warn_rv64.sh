@@ -23,14 +23,14 @@ git log -1 --pretty='%h ("%s")' HEAD~
 
 echo "Baseline building the tree"
 
-tuxmake --wrapper ccache --target-arch riscv --runtime podman --directory . \
+tuxmake --wrapper ccache --target-arch riscv - -directory . \
 	-o $tmpdir0 --toolchain gcc-11 --kconfig allmodconfig W=1
 
 git checkout -q HEAD~
 
 echo "Building the tree before the patch"
 
-tuxmake --wrapper ccache --target-arch riscv --runtime podman --directory . \
+tuxmake --wrapper ccache --target-arch riscv --directory . \
 	-o $tmpdir1 --toolchain gcc-11 --kconfig allmodconfig W=1 \
 	2> >(tee $tmpfile_o >&2)
 incumbent=$(grep -i -c "\(warn\|error\)" $tmpfile_o)
@@ -39,7 +39,7 @@ echo "Building the tree with the patch"
 
 git checkout -q $HEAD
 
-tuxmake --wrapper ccache --target-arch riscv --runtime podman --directory . \
+tuxmake --wrapper ccache --target-arch riscv --directory . \
 	-o $tmpdir2 --toolchain gcc-11 --kconfig allmodconfig W=1 \
 	2> >(tee $tmpfile_n >&2) || rc=1
 
