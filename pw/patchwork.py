@@ -132,6 +132,7 @@ class Patchwork(object):
         return self.get_all('series', {'project': project, 'since': since})
 
     def post_check(self, patch, name, state, url, desc):
+        raise PatchworkPostException(r)
         headers = {}
         if self._token:
             headers['Authorization'] = f'Token {self._token}'
