@@ -66,8 +66,13 @@ class Tester(threading.Thread):
         if not os.path.exists(self.result_dir):
             os.makedirs(self.result_dir)
 
-        tests_dir = os.path.abspath(core.CORE_DIR + "../../tests")
-        self.config.set('dirs', 'tests', self.config.get('dirs', 'tests', fallback=tests_dir))
+        base_dir = core.CORE_DIR + "../../"
+        tests_dir = self.config.get('dirs', 'tests', fallback="tests")
+
+        if not os.path.isabs(tests_dir):
+            tests_dir = os.path.abspath(base_dir + tests_dir)
+
+        self.config.set('dirs', 'tests', tests_dir)
 
         self.include = [x.strip() for x in re.split(r'[,\n]', self.config.get('tests', 'include', fallback="")) if len(x)]
         self.exclude = [x.strip() for x in re.split(r'[,\n]', self.config.get('tests', 'exclude', fallback="")) if len(x)]
