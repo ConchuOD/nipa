@@ -23,14 +23,14 @@ git log -1 --pretty='%h ("%s")' HEAD~
 
 echo "Baseline building the tree"
 
-PATH=$PATH make ARCH=riscv CCACHE_DIR=$CCACHE_DIR O=$tmpdir0 \
+make ARCH=riscv O=$tmpdir0 \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
-	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
+	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	-j $(nproc)
 
-PATH=$PATH make ARCH=riscv CCACHE_DIR=$CCACHE_DIR O=$tmpdir0 \
+make ARCH=riscv O=$tmpdir0 \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
-	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
+	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	-j $(nproc) -k
 
 rm -r build
@@ -38,14 +38,14 @@ git checkout -q HEAD~
 
 echo "Building the tree before the patch"
 
-PATH=$PATH make ARCH=riscv CCACHE_DIR=$CCACHE_DIR O=$tmpdir1 \
+make ARCH=riscv O=$tmpdir1 \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
 	-j $(nproc)
 
-PATH=$PATH make ARCH=riscv CCACHE_DIR=$CCACHE_DIR O=$tmpdir1 \
+make ARCH=riscv O=$tmpdir1 \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
-	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
+	CROSS_COMPILE="riscv64-unknown-linux-gnu"- \
 	-j $(nproc) -k \
 	2> >(tee $tmpfile_o >&2)
 incumbent=$(grep -i -c "\(warn\|error\)" $tmpfile_o)
@@ -54,14 +54,14 @@ echo "Building the tree with the patch"
 
 git checkout -q $HEAD
 
-PATH=$PATH make ARCH=riscv CCACHE_DIR=$CCACHE_DIR O=$tmpdir2 \
+make ARCH=riscv O=$tmpdir2 \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
-	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
+	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	-j $(nproc)
 
-PATH=$PATH make ARCH=riscv CCACHE_DIR=$CCACHE_DIR O=$tmpdir2 \
+make ARCH=riscv O=$tmpdir2 \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
-	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
+	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	-j $(nproc) -k \
 	2> >(tee $tmpfile_n >&2) || rc=1
 
