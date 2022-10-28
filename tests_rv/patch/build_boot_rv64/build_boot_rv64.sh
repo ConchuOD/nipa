@@ -6,12 +6,12 @@
 tmpdir=$(mktemp -d)
 rc=0
 
-PATH=$PATH CCACHE_DIR=$CCACHE_DIR make ARCH=riscv O=$tmpdir \
+make ARCH=riscv O=$tmpdir \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	-j $(nproc) || rc=1
 
-PATH=$PATH CCACHE_DIR=$CCACHE_DIR make ARCH=riscv O=$tmpdir \
+make ARCH=riscv O=$tmpdir \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	-j $(nproc) -k || rc=1
