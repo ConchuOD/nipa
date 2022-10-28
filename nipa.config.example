@@ -4,7 +4,7 @@ project = Linux RISC-V
 
 [poller]
 recheck_period = 0
-recheck_lookback = 48
+recheck_lookback = 24 
 
 [dirs]
 tests = tests_rv
