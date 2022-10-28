@@ -5,19 +5,17 @@
 
 tmpdir=$(mktemp -d)
 rc=0
-random_date="Tue Oct 18 02:52:44 PM IST 2022"
+export KBUILD_BUILD_TIMESTAMP="Tue Oct 18 02:52:44 PM IST 2022"
 
 make ARCH=riscv O=$tmpdir \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
-	KBUILD_BUILD_TIMESTAMP=$random_date \
 	C=1 \
 	-j $(nproc) || rc=1
 
 make ARCH=riscv O=$tmpdir \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
-	KBUILD_BUILD_TIMESTAMP=$random_date \
 	C=1 \
 	-j $(nproc) -k || rc=1
 
