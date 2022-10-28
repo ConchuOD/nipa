@@ -11,7 +11,6 @@ tmpfile_n=$(mktemp)
 tmpdir0=$(mktemp -d)
 tmpdir1=$(mktemp -d)
 tmpdir2=$(mktemp -d)
-export KBUILD_BUILD_TIMESTAMP="Tue Oct 18 02:52:44 PM IST 2022"
 
 rc=0
 

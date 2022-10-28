@@ -5,7 +5,6 @@
 
 tmpdir=$(mktemp -d)
 rc=0
-export KBUILD_BUILD_TIMESTAMP="Tue Oct 18 02:52:44 PM IST 2022"
 
 tuxmake --wrapper ccache --target-arch riscv --directory . \
 	-o $tmpdir --toolchain clang-nightly --kconfig allmodconfig LLVM=1 \
