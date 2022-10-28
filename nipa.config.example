@@ -3,7 +3,7 @@ server = patchwork.kernel.org
 project = Linux RISC-V
 
 [poller]
-recheck_period = 4
+recheck_period = 0
 recheck_lookback = 24 
 
 [dirs]
