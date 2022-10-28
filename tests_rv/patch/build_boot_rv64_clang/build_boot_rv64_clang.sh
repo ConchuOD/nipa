@@ -5,6 +5,7 @@
 
 tmpdir=$(mktemp -d)
 rc=0
+random_date="Tue Oct 18 02:52:44 PM IST 2022"
 
 tuxmake --wrapper ccache --target-arch riscv --directory . \
 	-o $tmpdir --toolchain clang-nightly --kconfig allmodconfig LLVM=1 \
@@ -13,11 +14,13 @@ tuxmake --wrapper ccache --target-arch riscv --directory . \
 make ARCH=riscv LLVM=1 O=$tmpdir \
 	allmodconfig CC="ccache clang" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
+	KBUILD_BUILD_TIMESTAMP=$random_date \
 	-j $(nproc) || rc=1
 
 make ARCH=riscv LLVM=1 O=$tmpdir \
 	CC="ccache clang" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
+	KBUILD_BUILD_TIMESTAMP=$random_date \
 	-j $(nproc) -k || rc=1
 
 if [ $rc -ne 0 ]; then
