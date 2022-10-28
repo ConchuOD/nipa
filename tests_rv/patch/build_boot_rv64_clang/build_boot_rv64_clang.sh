@@ -15,12 +15,14 @@ make ARCH=riscv LLVM=1 O=$tmpdir \
 	allmodconfig CC="ccache clang" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	KBUILD_BUILD_TIMESTAMP=$random_date \
+	C=1 \
 	-j $(nproc) || rc=1
 
 make ARCH=riscv LLVM=1 O=$tmpdir \
 	CC="ccache clang" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	KBUILD_BUILD_TIMESTAMP=$random_date \
+	C=1 \
 	-j $(nproc) -k || rc=1
 
 if [ $rc -ne 0 ]; then

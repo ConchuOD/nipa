@@ -28,12 +28,14 @@ make ARCH=riscv O=$tmpdir0 \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	KBUILD_BUILD_TIMESTAMP=$random_date \
+	C=1 \
 	-j $(nproc)
 
 make ARCH=riscv O=$tmpdir0 \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	KBUILD_BUILD_TIMESTAMP=$random_date \
+	C=1 \
 	-j $(nproc) -k
 
 rm -r build
@@ -45,12 +47,14 @@ make ARCH=riscv O=$tmpdir1 \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
 	KBUILD_BUILD_TIMESTAMP=$random_date \
+	C=1 \
 	-j $(nproc)
 
 make ARCH=riscv O=$tmpdir1 \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu"- \
 	KBUILD_BUILD_TIMESTAMP=$(random_date) \
+	C=1 \
 	-j $(nproc) -k \
 	2> >(tee $tmpfile_o >&2)
 incumbent=$(grep -i -c "\(warn\|error\)" $tmpfile_o)
@@ -63,12 +67,14 @@ make ARCH=riscv O=$tmpdir2 \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	KBUILD_BUILD_TIMESTAMP=$random_date \
+	C=1 \
 	-j $(nproc)
 
 make ARCH=riscv O=$tmpdir2 \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
 	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	KBUILD_BUILD_TIMESTAMP=$random_date \
+	C=1 \
 	-j $(nproc) -k \
 	2> >(tee $tmpfile_n >&2) || rc=1
 
