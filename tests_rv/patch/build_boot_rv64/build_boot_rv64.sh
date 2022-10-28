@@ -6,16 +6,15 @@
 tmpdir=$(mktemp -d)
 rc=0
 
-PATH=$PATH make ARCH=riscv CCACHE_DIR=$CCACHE_DIR O=$tmpdir \
+PATH=$PATH CCACHE_DIR=$CCACHE_DIR make ARCH=riscv O=$tmpdir \
 	allmodconfig CC="ccache riscv64-unknown-linux-gnu-gcc" \
-	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
+	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
 	-j $(nproc) || rc=1
 
-PATH=$PATH make ARCH=riscv CCACHE_DIR=$CCACHE_DIR O=$tmpdir \
+PATH=$PATH CCACHE_DIR=$CCACHE_DIR make ARCH=riscv O=$tmpdir \
 	CC="ccache riscv64-unknown-linux-gnu-gcc" \
-	CROSS_COMPILE=riscv64-unknown-linux-gnu- \
-	-j $(nproc) -k \
-	2> >(tee $tmpfile_n >&2) || rc=1
+	CROSS_COMPILE="riscv64-unknown-linux-gnu-" \
+	-j $(nproc) -k || rc=1
 
 if [ $rc -ne 0 ]; then
   echo "Build failed" >&$DESC_FD
