@@ -17,6 +17,6 @@ else
   if [ $new_inlines -eq $old_inlines ]; then
     exit 250
   else
-    exit 1
+    exit 250
   fi
 fi
