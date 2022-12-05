@@ -25,7 +25,6 @@ echo "Out of order selects before the patch: $before and now $now" >&$DESC_FD
 
 if [ $now -gt $before ]; then
   echo "New out of order selects added" 1>&2
-  diff -U 0 $tmpfile_b $tmpfile_n
 else
   rc=0
 fi
