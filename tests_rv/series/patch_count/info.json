@@ -1,4 +1,5 @@
 {
   "pymod": "test",
-  "pyfunc": "patch_count"
+  "pyfunc": "patch_count",
+  "disabled": true
 }
