@@ -15,4 +15,4 @@ def cover_letter(tree, thing, result_dir) -> Tuple[int, str]:
     # feature + selftest postings where commit message of the feature is definitive
     if len(thing.patches) < 3:
         return 0, "Single patches do not need cover letters"
-    return 250, "Series does not have a cover letter"
+    return 1, "Series does not have a cover letter"
