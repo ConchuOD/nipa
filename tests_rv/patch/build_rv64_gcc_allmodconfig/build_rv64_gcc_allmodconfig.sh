@@ -26,7 +26,8 @@ tuxmake --wrapper ccache --target-arch riscv -e PATH=$PATH --directory . \
 	--environment=KBUILD_BUILD_TIMESTAMP=@1621270510 \
 	--environment=KBUILD_BUILD_USER=tuxmake --environment=KBUILD_BUILD_HOST=tuxmake \
 	-o $tmpdir_o -b $tmpdir_b --toolchain gcc -z none --kconfig allmodconfig \
-	-K CONFIG_WERROR=n -K CONFIG_GCC_PLUGINS=n W=1 CROSS_COMPILE=riscv64-linux- \
+	-K CONFIG_WERROR=n -K CONFIG_GCC_PLUGINS=n W=1 \
+	CROSS_COMPILE=riscv64-linux- \
 	config default \
 	|| rc=1
 
@@ -46,7 +47,8 @@ tuxmake --wrapper ccache --target-arch riscv -e PATH=$PATH --directory . \
 	--environment=KBUILD_BUILD_TIMESTAMP=@1621270510 \
 	--environment=KBUILD_BUILD_USER=tuxmake --environment=KBUILD_BUILD_HOST=tuxmake \
 	-o $tmpdir_o -b $tmpdir_b --toolchain gcc -z none --kconfig allmodconfig \
-	-K CONFIG_WERROR=n -K CONFIG_GCC_PLUGINS=n W=1 CROSS_COMPILE=riscv64-linux- \
+	-K CONFIG_WERROR=n -K CONFIG_GCC_PLUGINS=n W=1 C=1 \
+	CROSS_COMPILE=riscv64-linux- \
 	config default \
 	> $tmpfile_o
 
@@ -60,7 +62,8 @@ tuxmake --wrapper ccache --target-arch riscv -e PATH=$PATH --directory . \
 	--environment=KBUILD_BUILD_TIMESTAMP=@1621270510 \
 	--environment=KBUILD_BUILD_USER=tuxmake --environment=KBUILD_BUILD_HOST=tuxmake \
 	-o $tmpdir_o -b $tmpdir_b --toolchain gcc -z none --kconfig allmodconfig \
-	-K CONFIG_WERROR=n -K CONFIG_GCC_PLUGINS=n W=1 CROSS_COMPILE=riscv64-linux- \
+	-K CONFIG_WERROR=n -K CONFIG_GCC_PLUGINS=n W=1 C=1 \
+	CROSS_COMPILE=riscv64-linux- \
 	config default \
 	> $tmpfile_n || rc=1
 
