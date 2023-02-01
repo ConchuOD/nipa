@@ -25,7 +25,7 @@ echo "Building the whole tree with the patch"
 tuxmake --wrapper ccache --target-arch riscv -e PATH=$PATH --directory . \
 	--environment=KBUILD_BUILD_TIMESTAMP=@1621270510 \
 	--environment=KBUILD_BUILD_USER=tuxmake --environment=KBUILD_BUILD_HOST=tuxmake \
-	-o $tmpdir0 -b $tmpdir_b --toolchain llvm -z none --kconfig allmodconfig \
+	-o $tmpdir_o -b $tmpdir_b --toolchain llvm -z none --kconfig allmodconfig \
 	-K CONFIG_WERROR=n -K CONFIG_RANDSTRUCT_NONE=y W=1 \
 	CROSS_COMPILE=riscv64-linux- \
 	config default \
@@ -48,7 +48,7 @@ echo "Building the tree before the patch"
 tuxmake --wrapper ccache --target-arch riscv -e PATH=$PATH --directory . \
 	--environment=KBUILD_BUILD_TIMESTAMP=@1621270510 \
 	--environment=KBUILD_BUILD_USER=tuxmake --environment=KBUILD_BUILD_HOST=tuxmake \
-	-o $tmpdir0 -b $tmpdir_b --toolchain llvm -z none --kconfig allmodconfig \
+	-o $tmpdir_o -b $tmpdir_b --toolchain llvm -z none --kconfig allmodconfig \
 	-K CONFIG_WERROR=n -K CONFIG_RANDSTRUCT_NONE=y W=1 \
 	CROSS_COMPILE=riscv64-linux- \
 	config default \
@@ -63,7 +63,7 @@ echo "Building the tree with the patch"
 tuxmake --wrapper ccache --target-arch riscv -e PATH=$PATH --directory . \
 	--environment=KBUILD_BUILD_TIMESTAMP=@1621270510 \
 	--environment=KBUILD_BUILD_USER=tuxmake --environment=KBUILD_BUILD_HOST=tuxmake \
-	-o $tmpdir0 -b $tmpdir_b --toolchain llvm -z none --kconfig allmodconfig \
+	-o $tmpdir_o -b $tmpdir_b --toolchain llvm -z none --kconfig allmodconfig \
 	-K CONFIG_WERROR=n -K CONFIG_RANDSTRUCT_NONE=y W=1 \
 	CROSS_COMPILE=riscv64-linux- \
 	config default \
