@@ -5,7 +5,7 @@
 tmpfile_b=$(mktemp)
 tmpfile_n=$(mktemp)
 
-rc=1
+rc=250
 
 HEAD=$(git rev-parse HEAD)
 
