@@ -13,14 +13,14 @@ git checkout -q HEAD~
 
 output_b=$(../../tests_rv/patch/alphanumeric_selects/alphanumeric_selects.pl arch/riscv/Kconfig)
 
-diff -y <(echo "$output_b") arch/riscv/Kconfig > $tmpfile_b
+diff -y arch/riscv/Kconfig <(echo "$output_b") > $tmpfile_b
 before=$(wc -l < $tmpfile_b)
 
 git checkout -q $HEAD
 
 output_n=$(../../tests_rv/patch/alphanumeric_selects/alphanumeric_selects.pl arch/riscv/Kconfig)
 
-diff -y <(echo "$output_n") arch/riscv/Kconfig > $tmpfile_n
+diff -y arch/riscv/Kconfig <(echo "$output_n") > $tmpfile_n
 now=$(wc -l < $tmpfile_n)
 
 echo "Out of order selects before the patch: $before and now $now" >&$DESC_FD
