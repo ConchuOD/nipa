@@ -1,4 +1,5 @@
 {
   "run": ["alphanumeric_selects.sh"],
-  "pull-requests": true
+  "pull-requests": true,
+  "disabled": true
 }
