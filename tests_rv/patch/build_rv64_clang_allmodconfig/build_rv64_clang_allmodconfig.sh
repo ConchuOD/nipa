@@ -5,6 +5,7 @@
 
 # Modified tests/patch/build_defconfig_warn.sh for RISC-V builds
 
+tmpfile_e=$(mktemp)
 tmpfile_o=$(mktemp)
 tmpfile_n=$(mktemp)
 
@@ -29,13 +30,13 @@ tuxmake --wrapper ccache --target-arch riscv -e PATH=$PATH --directory . \
 	-K CONFIG_WERROR=n -K CONFIG_RANDSTRUCT_NONE=y W=1 \
 	CROSS_COMPILE=riscv64-linux- \
 	config default \
-	|| rc=1
+	> $tmpfile_e || rc=1
 
 if [ $rc -eq 1 ]
 then
 	echo "Failed to build the tree with this patch." >&$DESC_FD
-	grep "\(error\):" $tmpfile_n >&2
-	rm -rf $tmpdir_o $tmpfile_o $tmpfile_n $tmpdir_b
+	grep "\(error\):" $tmpfile_e >&2
+	rm -rf $tmpdir_o $tmpfile_o $tmpfile_n $tmpdir_b $tmpfile_e
 	exit $rc
 fi
 
@@ -108,6 +109,6 @@ if [ $current -gt $incumbent ]; then
   rc=1
 fi
 
-rm -rf $tmpdir_o $tmpfile_o $tmpfile_n $tmpdir_b
+rm -rf $tmpdir_o $tmpfile_o $tmpfile_n $tmpdir_b $tmpfile_e
 
 exit $rc

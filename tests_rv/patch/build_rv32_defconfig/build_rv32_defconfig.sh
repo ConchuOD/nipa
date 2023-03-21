@@ -16,7 +16,7 @@ tuxmake --wrapper ccache --target-arch riscv --directory . \
 
 if [ $rc -ne 0 ]; then
 	echo "Build failed" >&$DESC_FD
-	grep "\(warning\|error\):" $tmpfile_n >&2
+	grep "\(warning\|error\):" $tmpfile >&2
 else
 	echo "Build OK" >&$DESC_FD
 fi
