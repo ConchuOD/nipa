@@ -111,6 +111,8 @@ class PwPoller:
         if hasattr(s, 'tree_name') and s.tree_name:
             log(f"Target tree - {s.tree_name}", "")
             res = f"Guessed tree name to be {s.tree_name}"
+            head_commit = self._trees[s.tree_name].get_current_head()
+            res += f" at HEAD {head_commit}"
         else:
             log("Target tree not found", "")
             res = "Failed to apply to next/pending-fixes or riscv/for-next"
