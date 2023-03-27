@@ -196,3 +196,13 @@ class Tree:
             self._pull_safe(pull_url)
         finally:
             core.log_end_sec()
+
+    def get_current_head(self):
+        ret = "n/a"
+        try:
+            self.reset()
+            ret = self.git(["rev-parse", "--short", "HEAD"])
+        except CMD.CmdError:
+            pass
+
+        return ret
