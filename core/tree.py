@@ -160,7 +160,7 @@ class Tree:
 
     def apply_prereqs(self, prereqs):
         for link in prereqs:
-            command = ["/stuff/b4/b4.sh", "shazam", link]
+            command = ["b4", "shazam", link]
             try:
                 CMD.cmd_run(command, cwd=self.path)
             except CMD.CmdError as e:
