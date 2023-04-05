@@ -164,7 +164,6 @@ class Tree:
             try:
                 CMD.cmd_run(command, cwd=self.path)
             except CMD.CmdError as e:
-                print(f"failed! {e}")
                 try:
                     self.git(["am", "--abort"])
                 except CMD.CmdError:
@@ -194,13 +193,15 @@ class Tree:
         return ret
 
     def check_applies_with_depends(self, thing):
-        core.log_open_sec("Test-applying " + thing.title)
+        core.log_open_sec("Test-applying (with pre-reqs) " + thing.title)
         try:
             self.reset()
 
             if hasattr(thing, "cover_letter"):
+                core.log_open_sec(thing.title + " has a cover, checking pre-reqs")
                 depends = thing.depends_from_cover()
                 if depends:
+                    core.log_open_sec("Applying pre-reqs for " + thing.title)
                     self.apply_prereqs(depends)
 
             self.apply(thing)
