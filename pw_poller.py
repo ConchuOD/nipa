@@ -112,6 +112,8 @@ class PwPoller:
                 s.tree_name = "for-next"
                 log(f"Target tree - {s.tree_name} (with dependencies)", "")
                 return "Guessed tree name to be for-next, with dependencies"
+        elif "master" in self._trees and self._trees["master"].check_applies(s):
+            s.tree_name = "master"
 
         if hasattr(s, 'tree_name') and s.tree_name:
             log(f"Target tree - {s.tree_name}", "")
@@ -120,7 +122,7 @@ class PwPoller:
             res += f" at HEAD {head_commit}"
         else:
             log("Target tree not found", "")
-            res = "Failed to apply to next/pending-fixes or riscv/for-next"
+            res = "Failed to apply to next/pending-fixes, riscv/for-next or riscv/master"
 
         return res
 
