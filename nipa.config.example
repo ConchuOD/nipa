@@ -12,6 +12,7 @@ trees = trees_rv
 [trees]
 for-next = for-next,for-next,origin,origin/for-next
 fixes = fixes,fixes,origin,origin/fixes
+master = master,master,origin,origin/master
 
 [patchwork]
 server = patchwork.kernel.org
