@@ -106,16 +106,16 @@ class Tester(threading.Thread):
 
     def load_tests(self, name):
         core.log_open_sec(name.capitalize() + " tests")
-        tests_subdir = os.path.join(self.config.get('dirs', 'tests'), name)
+#        tests_subdir = os.path.join(self.config.get('dirs', 'tests'), name)
         tests = []
-        for td in os.listdir(tests_subdir):
-            test = f'{name}/{td}'
-            if test not in self.exclude and (len(self.include) == 0 or test in self.include):
-                core.log(f"Adding test {test}")
-                tests.append(Test(os.path.join(tests_subdir, td), td))
-            else:
-                core.log(f"Skipped test {test}")
-        core.log_end_sec()
+#        for td in os.listdir(tests_subdir):
+#            test = f'{name}/{td}'
+#            if test not in self.exclude and (len(self.include) == 0 or test in self.include):
+#                core.log(f"Adding test {test}")
+#                tests.append(Test(os.path.join(tests_subdir, td), td))
+#            else:
+#                core.log(f"Skipped test {test}")
+#        core.log_end_sec()
 
         return tests
 

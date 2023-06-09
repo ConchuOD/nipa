@@ -1,4 +1,0 @@
-{
-  "run": ["build_32bit.sh"],
-  "pull-requests": true
-}

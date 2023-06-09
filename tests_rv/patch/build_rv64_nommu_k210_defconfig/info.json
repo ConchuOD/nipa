@@ -1,4 +1,0 @@
-{
-  "run": ["build_rv64_nommu_k210_defconfig.sh"],
-  "pull-requests": true
-}

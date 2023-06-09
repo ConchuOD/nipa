@@ -1,4 +1,0 @@
-{
-  "run": ["dtb_warn_rv64.sh"],
-  "pull-requests": true
-}

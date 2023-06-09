@@ -213,6 +213,22 @@ class Tree:
 
         return ret
 
+    def push_tree(self, series_id, patch_ids):
+        name = f"{series_id}->{self.name}"
+        try:
+            self.git(["cherry-pick", "b0bbb57b5a7c3a12cb3be4324c74b9b46cdfb238"])
+            self.git(["checkout", "-B", name])
+            with open(f"{self.path}/ids", 'w') as f:
+                for id in patch_ids:
+                    f.write(f"{id}\n")
+
+            self.git(["add", "ids"]);
+            self.git(["commit", "--amend", "--no-edit"])
+
+            self.git(["push", "github", name])
+        except CMD.CmdError as e:
+            raise PatchApplyError(e) from e
+
     def _pull_safe(self, pull_url):
         try:
             self.git_pull(pull_url)
