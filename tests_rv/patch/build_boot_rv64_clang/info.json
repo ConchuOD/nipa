@@ -1,5 +1,0 @@
-{
-  "run": ["build_boot_rv64_clang.sh"],
-  "pull-requests": true,
-  "disabled": true
-}

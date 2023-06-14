@@ -1,5 +1,0 @@
-{
-  "source": "https://raw.githubusercontent.com/gregkh/gregkh-linux/master/work/verify_fixes.sh",
-  "run": ["verify_fixes.sh", "HEAD~..HEAD"],
-  "pull-requests": true
-}

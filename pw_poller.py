@@ -115,6 +115,8 @@ class PwPoller:
         elif "master" in self._trees and self._trees["master"].check_applies(s):
             s.tree_name = "master"
 
+        self.series_push_github(s)
+
         if hasattr(s, 'tree_name') and s.tree_name:
             log(f"Target tree - {s.tree_name}", "")
             res = f"Guessed tree name to be {s.tree_name}"
@@ -134,6 +136,14 @@ class PwPoller:
             log_end_sec()
 
         return ret
+
+    def series_push_github(self, s: PwSeries):
+        log_open_sec('Pushing the tree')
+        try:
+            if hasattr(s, 'tree_name') and s.tree_name:
+                self._trees[s.tree_name].push_tree(s.id, s.patch_ids)
+        finally:
+            log_end_sec()
 
     def _process_series(self, pw_series) -> None:
         if pw_series['id'] in self.seen_series:
@@ -157,7 +167,9 @@ class PwPoller:
 
         if hasattr(s, 'tree_name') and s.tree_name:
             s.tree_selection_comment = comment
-            self._workers[s.tree_name].queue.put(s)
+            #self._workers[s.tree_name].queue.put(s)
+            core.write_tree_selection_result(self.result_dir, s, comment, False)
+            core.mark_done(self.result_dir, s)
         else:
             core.write_tree_selection_result(self.result_dir, s, comment, False)
             core.mark_done(self.result_dir, s)

@@ -1,4 +1,0 @@
-{
-  "run": ["maintainers_patterns.sh"],
-  "pull-requests": true
-}

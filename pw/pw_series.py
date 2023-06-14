@@ -19,6 +19,7 @@ class PwSeries(Series):
         self.pw_series = pw_series
         # pull_url loaded from patch 0, not from cover; it's for pure pulls only
         self.pull_url = None
+        self.patch_ids = []
 
         if pw_series['cover_letter']:
             pw_cover_letter = pw.get_mbox('cover', pw_series['cover_letter']['id'])
@@ -37,6 +38,7 @@ class PwSeries(Series):
             for p in self.pw_series['patches']:
                 raw_patch = pw.get_mbox('patch', p['id'])
                 self.patches.append(Patch(raw_patch, p['id']))
+                self.patch_ids.append(p['id'])
             return
 
         # Do more magic around series which are complete
@@ -73,6 +75,7 @@ class PwSeries(Series):
         for pid in pids:
             raw_patch = pw.get_mbox('patch', pid)
             self.patches.append(Patch(raw_patch, pid))
+            self.patch_ids.append(pid)
 
         if not pw_series['cover_letter']:
             if len(self.patches) == 1:
