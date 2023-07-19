@@ -139,9 +139,16 @@ class PwPoller:
 
     def series_push_github(self, s: PwSeries):
         log_open_sec('Pushing the tree')
+
+        patch_ids = list()
+
+        for patch in s['patches']:
+            patch_ids.append(patch['id'])
+
         try:
-            if hasattr(s, 'tree_name') and s.tree_name:
-                self._trees[s.tree_name].push_tree(s.id, s.patch_ids)
+            if hasattr(s, 'tree_name') and s.tree_name and patch_ids:
+                print(f"{patch_ids}")
+                self._trees[s.tree_name].push_tree(s.id, patch_ids)
         finally:
             log_end_sec()
 
