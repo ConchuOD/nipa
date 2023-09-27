@@ -105,13 +105,8 @@ class PwPoller:
 
         if "fixes" in self._trees and netdev.series_is_a_fix_for(s, self._trees["fixes"]):
             s.tree_name = "fixes"
-        elif "for-next" in self._trees:
-            if self._trees["for-next"].check_applies(s):
-                s.tree_name = "for-next"
-            elif self._trees["for-next"].check_applies_with_depends(s):
-                s.tree_name = "for-next"
-                log(f"Target tree - {s.tree_name} (with dependencies)", "")
-                return "Guessed tree name to be for-next, with dependencies"
+        elif "for-next" in self._trees and self._trees["for-next"].check_applies(s):
+            s.tree_name = "for-next"
         elif "master" in self._trees and self._trees["master"].check_applies(s):
             s.tree_name = "master"
 

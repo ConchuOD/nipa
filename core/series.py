@@ -43,21 +43,3 @@ class Series(object):
 
     def is_pure_pull(self):
         return bool(self.pull_url)
-
-    def depends_from_cover(self):
-        if not self.cover_letter:
-            return False
-
-        depends_section = re.compile(r'(?:based.on|depends.on|depend(?:a|e)ncies):\n(?:\S+@\S+\n)*', re.IGNORECASE | re.MULTILINE)
-        depends = re.compile(r'\S+@\S+', re.IGNORECASE)
-        match = depends_section.search(self.cover_letter)
-
-        if not match:
-            # fall back to patchew's git trailer style & try that
-            patchew_section = re.compile(r'(?:based.on: \S+@\S+\n)+', re.IGNORECASE | re.MULTILINE)
-            match = patchew_section.search(self.cover_letter)
-
-        if match:
-            return depends.findall(match.group(0))
-
-        return False

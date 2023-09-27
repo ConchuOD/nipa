@@ -10,7 +10,6 @@ from typing import List
 
 import core
 import core.cmd as CMD
-import core.series as SERIES
 from core import Patch
 
 
@@ -158,19 +157,6 @@ class Tree:
                 pass
             raise PatchApplyError(e) from e
 
-    def apply_prereqs(self, prereqs):
-        for link in prereqs:
-            command = ["/stuff/b4/b4.sh", "shazam", link]
-            try:
-                CMD.cmd_run(command, cwd=self.path)
-            except CMD.CmdError as e:
-                print(f"failed! {e}")
-                try:
-                    self.git(["am", "--abort"])
-                except CMD.CmdError:
-                    pass
-                raise PatchApplyError(e) from e
-
     def apply(self, thing):
         if isinstance(thing, Patch):
             self._apply_patch_safe(thing)
@@ -184,25 +170,6 @@ class Tree:
         core.log_open_sec("Test-applying " + thing.title)
         try:
             self.reset()
-            self.apply(thing)
-            ret = True
-        except PatchApplyError:
-            ret = False
-        finally:
-            core.log_end_sec()
-
-        return ret
-
-    def check_applies_with_depends(self, thing):
-        core.log_open_sec("Test-applying " + thing.title)
-        try:
-            self.reset()
-
-            if hasattr(thing, "cover_letter"):
-                depends = thing.depends_from_cover()
-                if depends:
-                    self.apply_prereqs(depends)
-
             self.apply(thing)
             ret = True
         except PatchApplyError:

@@ -65,8 +65,6 @@ finally:
 tree = Tree(args.tree_name, args.tree_name, args.tree, branch=args.tree_branch)
 if not tree.check_applies(series):
     print("Patch series does not apply cleanly to the tree")
-    if tree.check_applies_with_depends(series):
-        print("woo!")
     os.sys.exit(1)
 
 try:

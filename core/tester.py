@@ -157,20 +157,13 @@ class Tester(threading.Thread):
                     fp.write("0")
                 with open(os.path.join(series_apply, "desc"), "w+") as fp:
                     fp.write(f"Patch already applied to {tree.name}")
-                return [already_applied], [already_applied]
             else:
                 core.log("Series does not apply", "")
-                if not tree.check_applies_with_depends(series):
-                    with open(os.path.join(series_apply, "retcode"), "w+") as fp:
-                        fp.write("1")
-                    with open(os.path.join(series_apply, "desc"), "w+") as fp:
-                        fp.write(f"Patch does not apply to {tree.name}")
-                    return [already_applied], [already_applied]
-                else:
-                    with open(os.path.join(series_apply, "retcode"), "w+") as fp:
-                        fp.write("0")
-                    with open(os.path.join(series_apply, "desc"), "w+") as fp:
-                        fp.write(f"Patch does not apply to {tree.name} without dependencies")
+                with open(os.path.join(series_apply, "retcode"), "w+") as fp:
+                    fp.write("1")
+                with open(os.path.join(series_apply, "desc"), "w+") as fp:
+                    fp.write(f"Patch does not apply to {tree.name}")
+            return [already_applied], [already_applied]
 
         series_ret = []
         patch_ret = []
