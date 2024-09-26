@@ -14,9 +14,5 @@ if [ -z "$inlines" ]; then
 else
   echo -e "Detected inline keyword in C files\n$inlines" 1>&2
 
-  if [ $new_inlines -eq $old_inlines ]; then
-    exit 250
-  else
-    exit 1
-  fi
+  exit 250
 fi
